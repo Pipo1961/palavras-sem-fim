@@ -61,7 +61,7 @@ const image = photo ? origin + '/imagem-partilha/' + encodeURIComponent(id) : ''
 <meta property="og:url" content="${esc(canonical)}">
 ${image ? `<meta property="og:image" content="${esc(image)}">` : ''}
 <meta name="twitter:card" content="summary_large_image">
-<meta http-equiv="refresh" content="0;url=${esc(destination)}">
+
 <link rel="canonical" href="${esc(canonical)}">
 </head>
 <body>
