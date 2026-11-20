@@ -143,4 +143,21 @@ controls();if(db){loadPosts();loadBackground();refreshAuth();db.auth.onAuthState
  async function carregar(){if(!api){total.textContent='Não foi possível ligar ao serviço de seguidores.';return;}try{const {data,error}=await api.rpc('listar_seguidores_publicos');if(error)throw error;list.replaceChildren();const nomes=Array.isArray(data)?data:[];total.textContent=nomes.length+' '+(nomes.length===1?'seguidor':'seguidores');for(const item of nomes){const li=document.createElement('li');li.textContent=item.nome;list.appendChild(li)}}catch(e){total.textContent='Lista indisponível. Confirma a configuração do Supabase.';}}
  form.addEventListener('submit',async e=>{e.preventDefault();msg.textContent='';if(!form.reportValidity())return;if(!api){msg.textContent='Não foi possível ligar ao serviço. Tenta mais tarde.';return;}const btn=form.querySelector('button[type=submit]');btn.disabled=true;try{const nome=form.elements.nome.value.trim(),email=form.elements.email.value.trim();if(!nome||!email||!form.elements.consentimento.checked)throw Error('Preenche os campos e autoriza a apresentação pública do nome.');const {error}=await api.rpc('inscrever_seguidor',{p_nome:nome,p_email:email});if(error)throw error;msg.textContent='Obrigado! Já fazes parte dos seguidores. ♡';form.reset();await carregar()}catch(err){msg.textContent='Não foi possível concluir a inscrição. Verifica os dados ou tenta novamente.'}finally{btn.disabled=false}});
  carregar();
-})();</script></body></html>
+})();</script><script>
+window.addEventListener('load', function () {
+  if (!location.hash.startsWith('#texto-')) return;
+
+  let tentativas = 0;
+  const procurarTexto = setInterval(function () {
+    const id = decodeURIComponent(location.hash.slice(1));
+    const texto = document.getElementById(id);
+
+    if (texto) {
+      texto.scrollIntoView({ behavior: 'auto', block: 'start' });
+      clearInterval(procurarTexto);
+    }
+
+    if (++tentativas >= 30) clearInterval(procurarTexto);
+  }, 500);
+});
+</script></body></html>
