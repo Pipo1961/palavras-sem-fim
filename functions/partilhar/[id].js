@@ -45,8 +45,10 @@ export async function onRequestGet({ params, env }) {
   const description = String(post.conteudo || '')
     .replace(/\s+/g, ' ').slice(0, 190);
 
-  const photo = post.fotografia || '';
-  const image = photo.startsWith('https://') ? photo : '';
+const photo = post.fotografia || '';
+const image = photo.startsWith('https://')
+  ? photo
+  : (photo.startsWith('data:image/') ? origin + '/imagem-partilha/' + encodeURIComponent(id) : '');
 
   const html = `<!doctype html>
 <html lang="pt-PT">
