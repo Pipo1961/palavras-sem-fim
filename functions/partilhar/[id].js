@@ -47,8 +47,7 @@ export async function onRequestGet({ params, env }) {
 
 const photo = post.fotografia || '';
 const image = photo ? origin + '/imagem-partilha/' + encodeURIComponent(id) : '';
-  ? photo
-  : (photo.startsWith('data:image/') ? origin + '/imagem-partilha/' + encodeURIComponent(id) : '');
+  
 
   const html = `<!doctype html>
 <html lang="pt-PT">
