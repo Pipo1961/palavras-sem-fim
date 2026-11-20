@@ -66,6 +66,9 @@ ${image ? `<meta property="og:image" content="${esc(image)}">` : ''}
 <body>
 <p>A abrir a publicação...</p>
 <a href="${esc(destination)}">Ler publicação</a>
+<script>
+  window.location.replace(${JSON.stringify(destination)});
+</script>
 </body>
 </html>`;
 
