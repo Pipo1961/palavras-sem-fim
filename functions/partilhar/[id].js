@@ -46,7 +46,7 @@ export async function onRequestGet({ params, env }) {
     .replace(/\s+/g, ' ').slice(0, 190);
 
 const photo = post.fotografia || '';
-const image = photo.startsWith('https://')
+const image = photo ? origin + '/imagem-partilha/' + encodeURIComponent(id) : '';
   ? photo
   : (photo.startsWith('data:image/') ? origin + '/imagem-partilha/' + encodeURIComponent(id) : '');
 
